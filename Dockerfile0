@@ -1,0 +1,18 @@
+FROM fedora/apache
+MAINTAINER Vikas Yadav
+
+# Install all the relevant tools in the base image.
+RUN dnf -y update && dnf clean all
+RUN dnf -y install python && dnf clean all
+RUN dnf -y install mysql && dnf clean all
+RUN dnf -y install tar && dnf clean all
+RUN dnf -y install php && dnf clean all
+
+WORKDIR /var/www/html
+COPY v9.0.8.tar.gz /var/www/html/v9.0.8.tar.gz
+
+ADD owncloud.sh /var/www/html/owncloud.sh
+RUN chmod a+x owncloud.sh
+
+RUN ./owncloud.sh
+CMD ["/run-apache.sh"]
