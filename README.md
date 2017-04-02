@@ -13,4 +13,19 @@ This is the file using which the base image will be build. This is not complete 
 
 ## Dockerfile
 
-This is the file which will is used to test compatibility of install scripts. 
+This is the file which will is used to test compatibility of install scripts.
+
+## convert.py
+Idea is that this file will parse the config file, and test if the commands mentioned in the script are available in the base container. If not what are the missing commands.
+Developing it a little further can help in understanding which if running the install scripts will require any change in the environment.
+
+## Moving forward.
+
+Each install script can be packaged with information like:
+* What stack do they use? e.g. apache+php+mysql along with their versions.
+* A base image with those stacks in place can be provisioned and then install scripts can be run on those base image to install the apps.
+* This will require testing with multiple install scripts. Right now I have tested only with owncloud.
+
+
+
+PLEASE NOTE THAT THIS IS AN IDEA OF THE PROTOTYPE AND IS NOT COMPLETE IN ANY WAY.
