@@ -17,12 +17,14 @@ Copy the install_script and the test python script in container and run the test
 import re, os, yaml
 import bashlex, subprocess
 
+# Incomplete
 def identify_stack():
     # This will aid in writing build scripts for the app.
     dbs = ['mysql']
     webserver = ['apache']
     return []
 
+# Incomplete
 def validate_commands():
     # Parse all the commands and run them inside a base fedora container.
     # Get a list of commands which are available inside the fedora image
@@ -30,7 +32,7 @@ def validate_commands():
     # and list of commands which are not.
     return []
 
-# A helper function to generate docker file
+# A helper class to store a service 
 class Service:
     def __init__(self, name='', image='', cname='', volumes=[], environment=[]):
         self.name = name
@@ -53,11 +55,10 @@ class Service:
         return data
 
 
-def install():
-    # install web server in the base image.
-    # Dont install mysql instead use a docker-compose file to run them together.
-    return []
-
+# Extract all commands in the install script
+# currently using bashlex parser
+# Can be modified to handle complex scripts 
+# Returns a list of commands 
 def get_commands(lines):
     # Return a list of all commands in the program
     commands = []
