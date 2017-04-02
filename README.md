@@ -6,6 +6,21 @@ What this installer is trying to achieve?
 * Directly execute the install scripts in these containers instead of executing them in host machine.
 * The copy on write feature of docker will make sure that even if 100 containers are running use the same base image, the data replication doesn't take place.
 
+How it works?
+
+The fedora image available on docker hub is the skimmed out version of original fedora from which has bare minimum softwares installed in it. The motivation here is to build our own image from that fedora image which has all dependencies relevant to us pre-installed. 
+
+Dockerfile0 tries to generate a base image with all those dependencies. (and is not compmlete at all..just an idea).
+In future this can also ask for specific versions of each software that you want (e.g Php 7, Mysql 5.6, etc), that way application specific base images can be made if the need be. 
+
+Once the base image is ready we run a python script (convert.py) to parse the install script of the application and run inside the base image. The script will run inside the base container and try to identify the commands which might create an issue for the user. Most install scripts will execute without much issues (as per my assumption), and many might fail. This python script can be hardened enough to identify failures so that the install scripts can be modified manually as needed. 
+
+
+That was part 1 of the idea. 
+
+Part 2 is to take a new approach and not use install scripts at all. 
+The idea here is to take as input the application specific requirements from the admin along with the source code of the application to be installed and generate a docker-compose.yml file for it. 
+
 ## Dockerfile0
 
 This is the file using which the base image will be build. This is not complete in any way.
